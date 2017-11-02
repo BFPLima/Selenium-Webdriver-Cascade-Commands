@@ -43,18 +43,15 @@ using Selenium.Webdriver.CascadeCommands;
 
 #### Example 2
 ```c#
-            var chormeOptions = new ChromeOptions();
-            chormeOptions.AddArgument("--disable-gpu");
-            
-            var chromeDriver = new ChromeDriver(chormeOptions);        
+            IWebDriver driver = new FirefoxDriver();     
            
             IList<Person> listPerson = GetList();
 
             foreach (Person person in listPerson)
             {
-               chromeDriver.Navigate().GoToUrl("https://....");
+               driver.Navigate().GoToUrl("https://....");
             
-               CascadeCommands commands = new CascadeCommands(chromeDriver);
+               CascadeCommands commands = new CascadeCommands(driver);
 
                commands.FindElement(By.Id("name"))
                        .SendKeys(person.Name)
