@@ -149,7 +149,7 @@ namespace Selenium.Webdriver.CascadeCommands
                 IWebElement webElement = driver.FindElement(by);
                 this.CurrentElement = webElement;
 
-                AddRegistrySuccess("Find Element was executed sucessfully.", labelCommand);
+                AddRegistrySuccess("Find Element was executed successfully.", labelCommand);
             }
             catch (Exception ex)
             {
@@ -193,7 +193,7 @@ namespace Selenium.Webdriver.CascadeCommands
                 IWebElement webElement = (IWebElement)this.CurrentElement;
                 webElement.Click();
 
-                AddRegistrySuccess("Click execution was executed sucessfully.");
+                AddRegistrySuccess("Click execution was executed successfully.");
             }
             catch (Exception ex)
             {
@@ -243,7 +243,7 @@ namespace Selenium.Webdriver.CascadeCommands
                 IWebElement webElement = (IWebElement)this.CurrentElement;
                 webElement.SendKeys(txt);
 
-                AddRegistrySuccess("SendKeys execution was executed sucessfully.");
+                AddRegistrySuccess("SendKeys execution was executed successfully.");
             }
             catch (Exception ex)
             {
@@ -276,7 +276,7 @@ namespace Selenium.Webdriver.CascadeCommands
                 IWebElement webElement = (IWebElement)this.CurrentElement;
                 webElement.Submit();
 
-                AddRegistrySuccess("Submit execution was executed sucessfully.");
+                AddRegistrySuccess("Submit execution was executed successfully.");
             }
             catch (Exception ex)
             {
@@ -447,12 +447,12 @@ namespace Selenium.Webdriver.CascadeCommands
         /// <summary>
         /// Add one message to the Registry Execution list.
         /// </summary>
-        /// <param name="sucess">Indicates sucess or fault.</param>
+        /// <param name="success">Indicates success or fault.</param>
         /// <param name="message">The message to insert into.</param>
-        protected void AddRegistry(bool sucess, string message)
+        protected void AddRegistry(bool success, string message)
         {
             int nextId = this.listExecutionRegistry.Count() + 1;
-            this.listExecutionRegistry.Add(new ExecutionRegistry(nextId, sucess, message));
+            this.listExecutionRegistry.Add(new ExecutionRegistry(nextId, success, message));
         }
 
 
@@ -487,7 +487,7 @@ namespace Selenium.Webdriver.CascadeCommands
 
 
         /// <summary>
-        /// Add one Sucess message to the Registry Execution list.
+        /// Add one success message to the Registry Execution list.
         /// </summary>
         /// <param name="message"></param>
         protected void AddRegistrySuccess(string message)
@@ -498,7 +498,7 @@ namespace Selenium.Webdriver.CascadeCommands
 
 
         /// <summary>
-        /// Add one Sucess message to the Registry Execution list.
+        /// Add one success message to the Registry Execution list.
         /// </summary>
         /// <param name="message">The message to insert into.</param>
         /// <param name="labelCommand">The any text related to the command.</param>
