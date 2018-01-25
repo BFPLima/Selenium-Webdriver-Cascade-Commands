@@ -221,6 +221,7 @@ namespace Selenium.Webdriver.CascadeCommands
             return FindOnDriver(By.Name(name), labelCommand, "Find Element by Name was executed successfully.", "Find Element by Name execution has thrown some error.");
         }
 
+
         /// <summary>
         /// Find the fist IWebElement using the given method on Driver.
         /// </summary>
@@ -844,6 +845,68 @@ namespace Selenium.Webdriver.CascadeCommands
         }
 
 
+
+        /// <summary>
+        /// Select all opitons by the text contains.
+        /// </summary>
+        /// <param name="text">The text of the option to be selected. If an exact match is not found, this method will perform a substring method.</param>
+        /// <returns></returns>
+        public CascadeCommands SelectByTextContains(string text)
+        {
+
+            if (CancelExecution())
+                return this;
+
+            if (NoCurrent())
+            {
+                AddRegistryFault("There is no Current Element to SelectByTextContains! Check the previous operation.");
+                return this;
+            }
+
+
+            try
+            {
+                IWebElement webElement = (IWebElement)this.CurrentElement;
+                var selectElement = new OpenQA.Selenium.Support.UI.SelectElement(webElement);
+                string textLower = text.ToLower();
+                var options = selectElement.Options;
+
+                bool found = false;
+
+                foreach (var option in options)
+                {
+                    string optionTextLower = option.Text.ToLower();
+
+                    if (optionTextLower.Contains(textLower) || textLower.Contains(optionTextLower))
+                    {
+                        selectElement.SelectByText(option.Text);
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (found)
+                {
+                    AddRegistrySuccess("SelectByTextContains was executed successfully!");
+                }
+                else
+                {
+                    AddRegistryFault("SelectByTextContains execution has thrown some error : " + "No text found with " + text);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                AddRegistryFault("SelectByTextContains execution has thrown some error : " + ex.Message);
+            }
+
+            return this;
+        }
+
+
+
+
         /// <summary>
         /// Checks if there is no Current Element
         /// </summary>
@@ -939,6 +1002,16 @@ namespace Selenium.Webdriver.CascadeCommands
         }
 
 
+        public ExecutionRegistry GetLastExecutionRegistry()
+        {
+
+            if (this.listExecutionRegistry.Count() >= 1)
+            {
+                return this.listExecutionRegistry[this.listExecutionRegistry.Count() - 1];
+            }
+
+            return null;
+        }
 
     }
 
