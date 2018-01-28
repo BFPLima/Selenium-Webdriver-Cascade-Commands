@@ -1013,6 +1013,65 @@ namespace Selenium.Webdriver.CascadeCommands
             return null;
         }
 
+
+
+        /// <summary>
+        /// Check if an element exists.
+        /// </summary>
+        /// <param name="byes">An Array of By.</param>
+        /// <param name="found">Out put variable that indicates if an element was found at least in one of By in at byes.</param>
+        /// <returns></returns>        
+        public CascadeCommands CheckIfElementExists(By[] byes,
+                                                    out bool found)
+        {
+
+            found = false;
+
+            if (CancelExecution())
+                return this;
+
+
+            IList<string> results = new List<string>();
+
+            try
+            {
+
+                foreach (var by in byes)
+                {
+
+
+                    try
+                    {
+                        var elements = this.driver.FindElement(by);
+                        found = true;
+                        results.Add("Result By " + by.ToString() + " : true");
+                    }
+                    catch (Exception exIntern)
+                    {
+                        results.Add("Result By " + by.ToString() + " : false");
+                    }
+
+                }
+
+                string msgResults = string.Join(",", results.ToArray());
+
+                AddRegistrySuccess("CheckIfElementExists was executed successfully." + Environment.NewLine + msgResults);
+
+            }
+            catch (Exception ex)
+            {
+                string msgResults = string.Join(",", results.ToArray());
+
+                AddRegistryFault("CheckIfElementExists execution has thrown some error : " + ex.Message + Environment.NewLine + msgResults);
+            }
+
+
+
+            return this;
+        }
+
+
+
     }
 
 
